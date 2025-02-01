@@ -14,6 +14,12 @@ import UploadProduct from "../pages/UploadProduct";
 import ProductPage from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import PaymentPage from "../pages/PaymentPage";
+import SearchPage from "../pages/SearchPage";
+import UserPanel from "../pages/UserPanel";
+import MyOrder from "../pages/MyOrder";
+import ModifyProfile from "../pages/ModifyProfile";
+import TodaysOrder from "../pages/TodaysOrder";
+import SalesOverview from "../pages/SalesOverview";
 
 const router = createBrowserRouter(
   [
@@ -59,6 +65,25 @@ const router = createBrowserRouter(
           element: <PaymentPage />
         },
         {
+          path:'/search',
+          element:<SearchPage/>
+        },
+         {
+              path:'modify-profile',
+              element:<ModifyProfile/>
+        }
+            ,
+        {
+          path:'/user-panel',
+          element:<UserPanel/>,
+          children:[
+            {
+              path:'my-order',
+              element: <MyOrder/>
+            },
+          ]
+        },
+        {
           path:'/admin', 
           element: <AdminPage />, 
           children:[
@@ -75,6 +100,12 @@ const router = createBrowserRouter(
             },{
               path:'upload-product',
               element:<UploadProduct/>
+            },{
+              path:'todays-order',
+              element:<TodaysOrder/>
+            },{
+              path:'sales-overview',
+              element:<SalesOverview/>
             }
             
           ],

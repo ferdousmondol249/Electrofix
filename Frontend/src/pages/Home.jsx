@@ -18,6 +18,7 @@ import remotecar from '../assets/Catagory/remotecar.jpg';
 import BannerProduct from '../component/BannerProduct';
 import AllProductHome from '../component/AllProductHome';
 import LatestProduct from '../component/LatestProduct';
+import ChatBot from '../component/ChatBot';
 
 
 
@@ -60,6 +61,10 @@ const Home = () => {
         </div>
         
       </main>
+
+      <div>
+        <ChatBot/>
+      </div>
     </div>
   );
 };

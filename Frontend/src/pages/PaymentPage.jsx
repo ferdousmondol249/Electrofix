@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { successPayment } from "../Redux/Slice/cartSlice";
+import { useNavigate } from 'react-router-dom';
 
 const PaymentPage = () => {
   const { email } = useSelector((state) => state.login.user);
   const { cartItems } = useSelector((state) => state.cartSlice);
   const { totalAmount } = useSelector((state) => state.cartSlice); 
   const dispatch=useDispatch();
+  const navigation=useNavigate();
 
   const [data, setdata] = useState({
     cartItems: [],
@@ -98,6 +100,10 @@ const PaymentPage = () => {
       alert("An error occurred.");
     }
   };
+
+  const handleNavigation=()=>{
+    navigation('/');
+  }
   
   
   return (
@@ -161,6 +167,7 @@ const PaymentPage = () => {
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            onClick={handleNavigation}
           >
             Payment
           </button>

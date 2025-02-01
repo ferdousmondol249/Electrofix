@@ -7,7 +7,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useState } from "react";
 import {resetCart} from '../Redux/Slice/cartSlice'
 import {toast } from 'react-toastify'
-import { success_product_fetch } from "../Redux/Slice/productListSlice";
+import { set_search_query } from "../Redux/Slice/productListSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,9 +15,11 @@ const Header = () => {
   const { user, isLogin } = useSelector((state) => state.login);
   const { cartCount } = useSelector((state) => state.cartSlice);
 
-  const profileImageUrl = user?.image
-    ? `http://localhost:8000/${user.image.replace(/\\/g, "/")}`
-    : defPic;
+  
+  const profileImageUrl = user?.image && typeof user.image === 'string'
+  ? `http://localhost:8000/${user.image.replace(/\\/g, "/")}`
+  : defPic;
+
 
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -51,12 +53,18 @@ const Header = () => {
     }
   };
   
+  
 
   const [searchData, setSearchData] = useState("");
-  const [product, setProduct] = useState([]);
+  //const [product, setProduct] = useState([]);
   
   const handleSearch = async (e) => {
       e.preventDefault();
+
+      if(!searchData){
+        toast.error("Please enter a search term");
+        return;  
+      }
      
   
       try {
@@ -76,7 +84,10 @@ const Header = () => {
   
           if (data.success) {
              //dispatch(success_product_fetch(data));
-              setProduct(data.products);
+              dispatch(set_search_query(data.products));
+              setSearchData("");
+              navigate('/search');
+
           } else {
               toast.error("No products found");
           }
@@ -105,12 +116,14 @@ const Header = () => {
 
       <div className="flex-1 mx-4">
         <div className="relative">
-          <input
+        <input
             type="text"
             placeholder="Search..."
             className="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-            onChange={(e)=>setSearchData(e.target.value)}
-          />
+            value={searchData}  // ✅ Add this line to bind state
+            onChange={(e) => setSearchData(e.target.value)}
+        />
+
           <button className="absolute top-0 right-0 px-4 py-2 text-white bg-blue-500 rounded-r-lg hover:bg-blue-600"
           onClick={handleSearch}
           >

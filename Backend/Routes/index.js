@@ -17,13 +17,18 @@ const productFetchType = require("../Controller/productFetchType");
 const paymentController = require("../Controller/paymentController");
 const removeFromStock = require("../Controller/removeFromStock");
 const searchProductHome= require("../Controller/searchProductHome");
+const userOrderController = require("../Controller/userOrderController");
+const modifyProfileController = require("../Controller/modifyProfileController");
+const allOrderController = require("../Controller/allOrderController");
+const updateStatusController = require("../Controller/updateStatusController");
+const getSalesOverview= require("../Controller/getSalesOverview");
+const { getChatMessages, postChatMessage } = require('../Controller/chatController');
+
 
 
 
 router.post('/register', upload.single('image'), registerController);
 router.post('/login', authToken, loginController);
-//router.post('/reset-password-req',requestPasswordReset);
-
 router.post('/forgot-password-req', resetPasswordReqController);
 router.post('/reset-password', resetPasswordController);
 router.get('/admin/userlist',userListController);
@@ -36,5 +41,18 @@ router.get('/products', productFetchType);
 router.post('/cart/payment',paymentController);
 router.patch('/modify-stock/:id', removeFromStock);
 router.get('/search-products', searchProductHome);
+router.get('/user-panel/order/:email', userOrderController);
+router.post('/modify-profile',upload.single('image') ,modifyProfileController);
+router.get('/all-order', allOrderController);
+router.put('/update-status', updateStatusController);
+router.get('/admin/sales-overview', getSalesOverview);
+router.get('/chat', getChatMessages); 
+router.post('/chat', postChatMessage);
+
+
+
+
+
+
 
 module.exports = router;

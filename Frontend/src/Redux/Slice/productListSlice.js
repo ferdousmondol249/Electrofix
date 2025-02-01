@@ -8,6 +8,7 @@ const initialState = {
   isAdminPage:false,
   products: [],
   latestProducts:[], 
+  searchQuery: [],
 };
 
 const productListSlice = createSlice({
@@ -41,12 +42,15 @@ const productListSlice = createSlice({
           : product
       );
     },
+    set_search_query: (state, action) => {
+      state.searchQuery = action.payload; 
+    },
    
     
     
   },
 });
 
-export const { success_product_fetch, error_product_fetch, remove_product, update_product_stock,set_latest_products } =
+export const { success_product_fetch, error_product_fetch, remove_product, update_product_stock,set_latest_products, set_search_query } =
   productListSlice.actions;
 export default productListSlice.reducer;

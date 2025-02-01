@@ -5,7 +5,6 @@ import {
   FaShoppingCart,
   FaChartBar,
   FaCog,
-  FaHome,
 } from "react-icons/fa";
 
 const AdminPage = () => {
@@ -13,17 +12,8 @@ const AdminPage = () => {
     <div className="flex" style={{ height: "calc(100vh - 50px)" }}>
       {/* Sidebar */}
       <div className="bg-white text-black w-64 p-5 border-r border-gray-200">
-        <h2 className="text-xl font-bold mb-5">Admin Panel</h2>
+        <h2 className="text-xl font-bold mb-5">Admin Dash</h2>
         <ul>
-          <li className="py-2">
-            <Link
-              to="/admin/dashboard"
-              className="flex items-center py-2 px-4 rounded-lg font-bold hover:opacity-60"
-            >
-              <FaHome className="mr-3" size={18} />
-              Dashboard
-            </Link>
-          </li>
           <li className="py-2">
             <Link
               to="/admin/userlist"
@@ -75,20 +65,13 @@ const AdminPage = () => {
             <ul className="hidden group-hover:flex flex-col mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
               <li>
                 <Link
-                  to="/admin/all-order"
+                  to="/admin/todays-order"
                   className="block px-4 py-2 hover:bg-gray-100 text-black"
                 >
-                  Today`s Order
+                  All Order
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/admin/upload-product"
-                  className="block px-4 py-2 hover:bg-gray-100 text-black"
-                >
-                 All Order
-                </Link>
-              </li>
+             
             </ul>
             
           </li>
@@ -96,7 +79,7 @@ const AdminPage = () => {
 
           <li className="py-2">
             <Link
-              to="/admin/sales"
+              to="/admin/sales-overview"
               className="flex items-center py-2 px-4 rounded-lg font-bold hover:opacity-60"
             >
               <FaChartBar className="mr-3" size={18} />
@@ -105,7 +88,7 @@ const AdminPage = () => {
           </li>
           <li className="py-2">
             <Link
-              to="/admin/settings"
+              to="/modify-profile"
               className="flex items-center py-2 px-4 rounded-lg font-bold hover:opacity-60"
             >
               <FaCog className="mr-3" size={18} />
